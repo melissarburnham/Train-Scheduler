@@ -3,5 +3,11 @@ panel-body a {
 }
 
 .jumbotron {
-    background-color: #20315A ; color: white;
+    background-color: rgb(62, 134, 196) ; color: white;
+}
+
+#trainImg {
+    width: 75px;
+    height: 75px;
+    padding-bottom: 15px;
 }
