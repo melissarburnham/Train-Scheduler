@@ -24,7 +24,9 @@
        <!-- Jumbotron for Title -->
        <div class="jumbotron">
             <h1 class="text-center"><strong><img src="assets/images/train.jpg" id="trainImg"> Train Schedule</strong></h1>
-          </div>
+      </div>
+
+
 
         <!-- Train Schedule results -->
         <div class="row">
@@ -39,6 +41,16 @@
       
                  <!-- added trains-->
                 <div class="panel-body" id="currentTrains">
+                    <table id="trainTable">
+                        <tr>
+                          <th>Train Name</th>
+                          <th>Destination</th> 
+                          <th>Frequency (min)</th>
+                          <th>Next Arrival</th>
+                          <th>Minutes Away</th>
+                        </tr>
+                     </table>   
+
                 </div>
               </div>
             </div>
@@ -48,7 +60,7 @@
         <div class="row">
           <div class="col-sm-12">
             <br>
-            <!-- First panel is for handling the search parameters -->
+            <!-- panel for title of form -->
             <div class="panel panel-primary">
               <div class="panel-heading">
                 <h3 class="panel-title"><strong>Add Train</strong></h3>
@@ -56,7 +68,7 @@
               <div class="panel-body">
     
                 <!-- Here we create an HTML Form for handling the inputs-->
-                <form role="form">
+                <form role="form" id="trainForm">
     
                   <!-- Train Name input-->
                   <div class="form-group">
@@ -79,11 +91,11 @@
                   <!--Frequency Input -->
                   <div class="form-group">
                     <label for="end-year">Frequency (minutes)</label>
-                    <input type="text" class="form-control" id="freqency">
+                    <input type="text" class="form-control" id="frequency">
                   </div>
     
                   <!-- Here we have our final submit button -->
-                  <button type="submit" class="btn btn-default" id="run-search">Sumbit</button>
+                  <button type="submit" class="btn btn-default" id="submit">Sumbit</button>
                 </form>
               </div>
             </div>
@@ -96,7 +108,7 @@
     
             <!-- Line Break followed by closing -->
             <hr>
-            <h5 class="text-center"><small>Made by Ahmed with lots and lots of <i class="fa fa-heart"></i></small></h5>
+            <h5 class="text-center">Copyright 2018 Melissa Burnham</h5>
     
           </div>
         </div>

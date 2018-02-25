@@ -4,10 +4,15 @@ panel-body a {
 
 .jumbotron {
     background-color: rgb(62, 134, 196) ; color: white;
+    border: black dotted 2px;
 }
 
 #trainImg {
     width: 75px;
     height: 75px;
     padding-bottom: 15px;
+}
+
+#trainTable {
+    width: 100%;
 }
