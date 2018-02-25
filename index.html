@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Train Schedule</title>
+
+   <!-- Bootswatch Styling link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css">
+    <!-- Font Awesome CSS Icons (For cool glyphicons) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!--CSS link -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+     <!-- favicon link -->
+     <link rel="icon" type="image/ico" href="assets/images/favicon.ico">
+     <!-- google fonts link -->
+     <!-- <link href="https://fonts.googleapis.com/css?family=Mountains+of+Christmas" rel="stylesheet"> -->
+</head>
+<body>
+    <!-- Main Bootstrap Search -->
+  <div class="container">
+
+       <!-- Jumbotron for Title -->
+       <div class="jumbotron">
+            <h1 class="text-center"><strong><i class="fas fa-train"></i> Train Schedule</strong></h1>
+          </div>
+
+        <!-- Train Schedule results -->
+        <div class="row">
+            <div class="col-sm-12">
+              <br>
+
+              <div class="panel panel-primary">
+      
+                <div class="panel-heading">
+                  <h3 class="panel-title"><strong>Current Train Schedule</strong></h3>
+                </div>
+      
+                 <!-- added trains-->
+                <div class="panel-body" id="currentTrains">
+                </div>
+              </div>
+            </div>
+          </div>
+    
+        <!-- Row for Adding Train -->
+        <div class="row">
+          <div class="col-sm-12">
+            <br>
+            <!-- First panel is for handling the search parameters -->
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title"><strong>Add Train</strong></h3>
+              </div>
+              <div class="panel-body">
+    
+                <!-- Here we create an HTML Form for handling the inputs-->
+                <form role="form">
+    
+                  <!-- Train Name input-->
+                  <div class="form-group">
+                    <label for="name">Train Name</label>
+                    <input type="text" class="form-control" id="trainName">
+                  </div>
+    
+                  <!-- Destination input -->
+                  <div class="form-group">
+                    <label for="destination">Destination</label>
+                    <input type="text" class="form-control" id="destination">
+                  </div>
+    
+                  <!-- First Train Time Input-->
+                  <div class="form-group">
+                    <label for="start-year">First Train Time (HH:mm - miliary time)</label>
+                    <input type="text" class="form-control" id="trainTime">
+                  </div>
+    
+                  <!--Frequency Input -->
+                  <div class="form-group">
+                    <label for="end-year">Frequency (minutes)</label>
+                    <input type="text" class="form-control" id="freqency">
+                  </div>
+    
+                  <!-- Here we have our final submit button -->
+                  <button type="submit" class="btn btn-default" id="run-search">Sumbit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Footer Region -->
+        <div class="row">
+          <div class="col-sm-12">
+    
+            <!-- Line Break followed by closing -->
+            <hr>
+            <h5 class="text-center"><small>Made by Ahmed with lots and lots of <i class="fa fa-heart"></i></small></h5>
+    
+          </div>
+        </div>
+    
+      </div>
+<!-- Link to the jQuery Library -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+ <!--JS link -->
+ <script src="assets/javascript/app.js"></script>
+</body>
+</html>
