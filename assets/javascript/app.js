@@ -1,3 +1,5 @@
+window.onload = function() {
+
 $("#submit").on("click", function(){
     event.preventDefault();
 
@@ -18,19 +20,23 @@ $("#submit").on("click", function(){
     tRow.append(trainTd, destinationTd, frequencyTD, trainTimeTd);
     // Append the table row to the table body
     tBody.append(tRow);
+    console.log(trainTimeTd);
     }
+    
     function emptyInput(){
-        $("#trainName").val(" ");
-        $("#destination").val(" ");
-        $("#trainTime").val(" ");
-        $("#frequency").val(" ");          
+        $("input").val("");         
     }
+
     createRows();
     emptyInput();
     // alert("Train has successfully been submitted!");
 });
-
+}
 
 //NEED TO DO:
 //store input in local storage
 //use moment.js to calculate next Arrival and Minutes Away
+    //parseInt ---> trainTime input + frequency = Next Arrival
+    //next arrival - current time = minutes away OR
+        //current time - next arrival = minutes away
+  //** MAYBE USE FUNCTION moment(time).fromNow() and moment.duration(result).humanize() OR .as('minutes')
