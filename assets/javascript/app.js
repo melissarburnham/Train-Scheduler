@@ -20,7 +20,6 @@ window.onload = function() {
   var nextArrival;
   var minutesAway;
 
-
 $("#submit").on("click", function(){
     event.preventDefault();
 
@@ -29,13 +28,6 @@ $("#submit").on("click", function(){
     var destination = $("#destination").val().trim();
     var trainTime = $("#trainTime").val().trim();
     var frequency = $("#frequency").val().trim();
-
-    database.ref().set({
-        Name: trainName,
-        Destination: destination,
-        Departure: trainTime,
-        Frequency: frequency
-    });
 
     //dynamically creates a row for each submission
     var tBody = $("#trainTable");
@@ -49,6 +41,13 @@ $("#submit").on("click", function(){
     // Append the table row to the table body
     tBody.append(tRow);
     console.log(trainTimeTd);
+
+    database.ref().set({
+        Name: trainName,
+        Destination: destination,
+        Departure: trainTime,
+        Frequency: frequency
+    });
     }
 
     //clear form after user hits submit
@@ -65,24 +64,24 @@ $("#submit").on("click", function(){
     // alert("Train has successfully been submitted!");
     createRows();
     emptyInput();
+    });
 
     database.ref().on("value", function(snapshot){
-        
+    
         console.log(snapshot.val().Name);
         console.log(snapshot.val().Destination);
         console.log(snapshot.val().Departure);
         console.log(snapshot.val().Frequency);
     
-        trainName.text(snapshot.val().Name);
-        destination.text(snapshot.val().Destination);
-        trainTime.text(snapshot.val().Departure);
-        frequency.text(snapshot.val().Freqeuncy);
+        $("#trainName").text(snapshot.val().Name);
+        $("#destination").text(snapshot.val().Destination);
+        $("#trainTime").text(snapshot.val().Departure);
+        $("#frequency").text(snapshot.val().Freqeuncy);
 
     }, function(errorObject){
         console.log("The read failed: " + errorObject.cod)
                 
-        })
-    });
+    })
 }
 
    
