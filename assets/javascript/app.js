@@ -2,12 +2,12 @@ window.onload = function() {
 
  // Initialize Firebase
  var config = {
-    apiKey: "AIzaSyAMKZbkF-SRPYZiBN4DTtabV36yutEgiQ0",
-    authDomain: "bus-scheduler-8551b.firebaseapp.com",
-    databaseURL: "https://bus-scheduler-8551b.firebaseio.com",
-    projectId: "bus-scheduler-8551b",
-    storageBucket: "bus-scheduler-8551b.appspot.com",
-    messagingSenderId: "817486480975"
+    apiKey: "AIzaSyCTCvn5-nM73Nu1A-w25oa554hmLaxZl8Q",
+    authDomain: "train-scheduler-321c9.firebaseapp.com",
+    databaseURL: "https://train-scheduler-321c9.firebaseio.com",
+    projectId: "train-scheduler-321c9",
+    storageBucket: "train-scheduler-321c9.appspot.com",
+    messagingSenderId: "1030667431613"
   };
   firebase.initializeApp(config);
 
@@ -30,6 +30,13 @@ $("#submit").on("click", function(){
     var trainTime = $("#trainTime").val().trim();
     var frequency = $("#frequency").val().trim();
 
+    database.ref().set({
+        Name: trainName,
+        Destination: destination,
+        Departure: trainTime,
+        Frequency: frequency
+    });
+
     //dynamically creates a row for each submission
     var tBody = $("#trainTable");
     var tRow = $("<tr>");
@@ -43,13 +50,6 @@ $("#submit").on("click", function(){
     tBody.append(tRow);
     console.log(trainTimeTd);
     }
-
-    database.ref().set({
-        Name: train,
-        Destination: destination,
-        Departure: trainTime,
-        Frequency: frequency
-    });
 
     //clear form after user hits submit
     function emptyInput(){
@@ -65,24 +65,25 @@ $("#submit").on("click", function(){
     // alert("Train has successfully been submitted!");
     createRows();
     emptyInput();
-});
 
-database.ref().on("value", function(snapshot){
-    console.log(snapshot.val().Name);
-    console.log(snapshot.val().Destination);
-    console.log(snapshot.val().Departure);
-    console.log(snapshot.val().Frequency);
+    database.ref().on("value", function(snapshot){
+        
+        console.log(snapshot.val().Name);
+        console.log(snapshot.val().Destination);
+        console.log(snapshot.val().Departure);
+        console.log(snapshot.val().Frequency);
+    
+        trainName.text(snapshot.val().Name);
+        destination.text(snapshot.val().Destination);
+        trainTime.text(snapshot.val().Departure);
+        frequency.text(snapshot.val().Freqeuncy);
 
-    trainTd.text(snapshot.val().Name);
-    destinationTd.text(snapshot.val().Destination);
-    trainTimeTd.text(snapshot.val().Departure);
-    frequencyTd.text(snapshot.val().Freqeuncy);
-}, function(errorObject){
-    console.log("The read failed: " + errorObject.cod)
-            
-})
-   
-    }
+    }, function(errorObject){
+        console.log("The read failed: " + errorObject.cod)
+                
+        })
+    });
+}
 
    
 
