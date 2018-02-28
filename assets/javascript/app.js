@@ -55,23 +55,11 @@ $("#submit").on("click", function(){
     });
 
     database.ref().on("child_added", function(snapshot){
-    
+
         var tName = snapshot.val().name;
         var tDestination = snapshot.val().destination;
         var tTime = snapshot.val().departure;
         var tFrequency = snapshot.val().frequency;
-
-        var tBody = $("#trainTable");
-        var tRow = $("<tr>");
-        var trainTd = $("<td>").text(tName);
-        var destinationTd = $("<td>").text(tDestination);
-        var trainTimeTd = $("<td>").text(tTime);
-        var frequencyTd = $("<td>").text(tFrequency);
-        // Append the newly created table data to the table row
-        tRow.append(trainTd, destinationTd, frequencyTd, trainTimeTd);
-        // Append the table row to the table body
-        tBody.append(tRow);
-        console.log(trainTimeTd);
 
         console.log(snapshot.val());
         console.log(snapshot.val().name);
@@ -79,40 +67,39 @@ $("#submit").on("click", function(){
         console.log(snapshot.val().departure);
         console.log(snapshot.val().frequency);
 
+        console.log("Departure: " + tTime);
+
+        var tTimeConverted = moment(tTime, "hh:mm").subtract(1, "years");
+        console.log("TIME CONVERTED: " + tTimeConverted);
+        var currentTime = moment();
+        console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+        var diffTime = moment().diff(moment(tTimeConverted), "minutes");
+        console.log("DIFFERENCE IN TIME: " + diffTime);
+        var tRemainder = diffTime % tFrequency;
+        console.log("remainder: " + tRemainder);
+        var minutesTillTrain = (tFrequency - tRemainder);
+        console.log("minTilTrain: " + minutesTillTrain);
+        var nextTrain = moment().add(minutesTillTrain, "minutes").format("hh:mm");
+        console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+
+        var tBody = $("#trainTable");
+        var tRow = $("<tr>");
+        var trainTd = $("<td>").text(tName);
+        var destinationTd = $("<td>").text(tDestination);
+        var trainTimeTd = $("<td>").text(nextTrain);
+        var frequencyTd = $("<td>").text(tFrequency);
+        var minutesAwayTd = $("<td>").text(minutesTillTrain);
+        
+        // Append the newly created table data to the table row
+        tRow.append(trainTd, destinationTd, frequencyTd, trainTimeTd, minutesTillTrain);
+        // Append the table row to the table body
+        tBody.append(tRow);
+        console.log(trainTimeTd);
+
     }, function(errorObject){
         console.log("The read failed: " + errorObject.code)      
     })
-
-
-
-
-
-var firstTime = "08:30";
-
-var firstTimeConverted = moment(firstTime, "hh:mm").subtract(1, "years");
-console.log("TC: " + firstTimeConverted);
-
-var currentTime = moment();
-console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
-
-var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-console.log("DIFFERENCE IN TIME: " + diffTime);
-
-var tfreq = 3;
-
-var tRemainder = diffTime % tfreq;
-console.log("remainder: " + tRemainder);
-
-var minutesTillTrain = tfreq - tRemainder;
-console.log("minTilTrain: " + minutesTillTrain);
-
-var nextTrain = moment().add(minutesTillTrain, "minutes");
-console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 }
-
-
-
-
 
 //NEED TO DO:
 //store data into Firebase 
