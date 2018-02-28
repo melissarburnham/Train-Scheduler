@@ -18,10 +18,7 @@ window.onload = function() {
   var trainTime;
   var frequency = 0;
   var minutesAway;
-  var computerTime = (moment().hour() + ":" + moment().minutes());
-  var nextArrival = moment(computerTime, "HH:mm").add(frequency, "minutes").format("HH:mm");
-  console.log(computerTime);
-  console.log("NA " + nextArrival);
+  var nextArrival;
 
 $("#submit").on("click", function(){
     event.preventDefault();
@@ -34,7 +31,7 @@ $("#submit").on("click", function(){
     database.ref().push({
         name: trainName,
         destination: destination,
-        departure: trainTime,
+        firstTrain: trainTime,
         frequency: frequency
     });
     
@@ -58,29 +55,29 @@ $("#submit").on("click", function(){
 
         var tName = snapshot.val().name;
         var tDestination = snapshot.val().destination;
-        var tTime = snapshot.val().departure;
+        var tTime = snapshot.val().firstTrain;
         var tFrequency = snapshot.val().frequency;
 
         console.log(snapshot.val());
         console.log(snapshot.val().name);
         console.log(snapshot.val().destination);
-        console.log(snapshot.val().departure);
+        console.log(snapshot.val().firstTrian);
         console.log(snapshot.val().frequency);
 
-        console.log("Departure: " + tTime);
+        console.log("FirstTrain: " + tTime);
 
-        var tTimeConverted = moment(tTime, "hh:mm").subtract(1, "years");
+        var tTimeConverted = moment(tTime, "HH:mm");
         console.log("TIME CONVERTED: " + tTimeConverted);
         var currentTime = moment();
-        console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+        console.log("CURRENT TIME: " + moment(currentTime).format("HH:mm"));
         var diffTime = moment().diff(moment(tTimeConverted), "minutes");
         console.log("DIFFERENCE IN TIME: " + diffTime);
         var tRemainder = diffTime % tFrequency;
         console.log("remainder: " + tRemainder);
         var minutesTillTrain = (tFrequency - tRemainder);
         console.log("minTilTrain: " + minutesTillTrain);
-        var nextTrain = moment().add(minutesTillTrain, "minutes").format("hh:mm");
-        console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+        var nextTrain = moment().add(minutesTillTrain, "minutes").format("HH:mm");
+        console.log("ARRIVAL TIME: " + moment(nextTrain).format("HH:mm"));
 
         var tBody = $("#trainTable");
         var tRow = $("<tr>");
@@ -94,8 +91,7 @@ $("#submit").on("click", function(){
         tRow.append(trainTd, destinationTd, frequencyTd, trainTimeTd, minutesTillTrain);
         // Append the table row to the table body
         tBody.append(tRow);
-        console.log(trainTimeTd);
-
+    
     }, function(errorObject){
         console.log("The read failed: " + errorObject.code)      
     })
