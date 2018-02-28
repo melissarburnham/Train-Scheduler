@@ -17,8 +17,11 @@ window.onload = function() {
   var destination = "";
   var trainTime;
   var frequency = 0;
-  var nextArrival;
   var minutesAway;
+  var computerTime = (moment().hour() + ":" + moment().minutes());
+  var nextArrival = moment(computerTime, "HH:mm").add(frequency, "minutes").format("HH:mm");
+  console.log(computerTime);
+  console.log("NA " + nextArrival);
 
 $("#submit").on("click", function(){
     event.preventDefault();
@@ -35,7 +38,6 @@ $("#submit").on("click", function(){
         frequency: frequency
     });
     
-
     //clear form after user hits submit
     function emptyInput(){
         $("input").val("");         
@@ -76,18 +78,40 @@ $("#submit").on("click", function(){
         console.log(snapshot.val().destination);
         console.log(snapshot.val().departure);
         console.log(snapshot.val().frequency);
-    
-        // $("#trainName").text(snapshot.val().name);
-        // $("#destination").text(snapshot.val().destination);
-        // $("#trainTime").text(snapshot.val().departure);
-        // $("#frequency").text(snapshot.val().frequency);
-
 
     }, function(errorObject){
-        console.log("The read failed: " + errorObject.cod)
-                
+        console.log("The read failed: " + errorObject.code)      
     })
+
+
+
+
+
+var firstTime = "08:30";
+
+var firstTimeConverted = moment(firstTime, "hh:mm").subtract(1, "years");
+console.log("TC: " + firstTimeConverted);
+
+var currentTime = moment();
+console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+console.log("DIFFERENCE IN TIME: " + diffTime);
+
+var tfreq = 3;
+
+var tRemainder = diffTime % tfreq;
+console.log("remainder: " + tRemainder);
+
+var minutesTillTrain = tfreq - tRemainder;
+console.log("minTilTrain: " + minutesTillTrain);
+
+var nextTrain = moment().add(minutesTillTrain, "minutes");
+console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 }
+
+
+
 
 
 //NEED TO DO:
