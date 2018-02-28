@@ -22,33 +22,19 @@ window.onload = function() {
 
 $("#submit").on("click", function(){
     event.preventDefault();
-
-    function createRows(){
+    
     var trainName = $("#trainName").val().trim();
     var destination = $("#destination").val().trim();
     var trainTime = $("#trainTime").val().trim();
     var frequency = $("#frequency").val().trim();
 
-    //dynamically creates a row for each submission
-    var tBody = $("#trainTable");
-    var tRow = $("<tr>");
-    var trainTd = $("<td>").text(trainName);
-    var destinationTd = $("<td>").text(destination);
-    var trainTimeTd = $("<td>").text(trainTime);
-    var frequencyTd = $("<td>").text(frequency);
-    // Append the newly created table data to the table row
-    tRow.append(trainTd, destinationTd, frequencyTd, trainTimeTd);
-    // Append the table row to the table body
-    tBody.append(tRow);
-    console.log(trainTimeTd);
-
-    database.ref().set({
-        Name: trainName,
-        Destination: destination,
-        Departure: trainTime,
-        Frequency: frequency
+    database.ref().push({
+        name: trainName,
+        destination: destination,
+        departure: trainTime,
+        frequency: frequency
     });
-    }
+    
 
     //clear form after user hits submit
     function emptyInput(){
@@ -62,21 +48,40 @@ $("#submit").on("click", function(){
    
     // calculateNextArrival();
     // alert("Train has successfully been submitted!");
-    createRows();
+
     emptyInput();
     });
 
-    database.ref().on("value", function(snapshot){
+    database.ref().on("child_added", function(snapshot){
     
-        console.log(snapshot.val().Name);
-        console.log(snapshot.val().Destination);
-        console.log(snapshot.val().Departure);
-        console.log(snapshot.val().Frequency);
+        var tName = snapshot.val().name;
+        var tDestination = snapshot.val().destination;
+        var tTime = snapshot.val().departure;
+        var tFrequency = snapshot.val().frequency;
+
+        var tBody = $("#trainTable");
+        var tRow = $("<tr>");
+        var trainTd = $("<td>").text(tName);
+        var destinationTd = $("<td>").text(tDestination);
+        var trainTimeTd = $("<td>").text(tTime);
+        var frequencyTd = $("<td>").text(tFrequency);
+        // Append the newly created table data to the table row
+        tRow.append(trainTd, destinationTd, frequencyTd, trainTimeTd);
+        // Append the table row to the table body
+        tBody.append(tRow);
+        console.log(trainTimeTd);
+
+        console.log(snapshot.val());
+        console.log(snapshot.val().name);
+        console.log(snapshot.val().destination);
+        console.log(snapshot.val().departure);
+        console.log(snapshot.val().frequency);
     
-        $("#trainName").text(snapshot.val().Name);
-        $("#destination").text(snapshot.val().Destination);
-        $("#trainTime").text(snapshot.val().Departure);
-        $("#frequency").text(snapshot.val().Freqeuncy);
+        // $("#trainName").text(snapshot.val().name);
+        // $("#destination").text(snapshot.val().destination);
+        // $("#trainTime").text(snapshot.val().departure);
+        // $("#frequency").text(snapshot.val().frequency);
+
 
     }, function(errorObject){
         console.log("The read failed: " + errorObject.cod)
@@ -84,7 +89,6 @@ $("#submit").on("click", function(){
     })
 }
 
-   
 
 //NEED TO DO:
 //store data into Firebase 
