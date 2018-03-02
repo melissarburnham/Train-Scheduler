@@ -16,3 +16,13 @@ panel-body a {
 #trainTable {
     width: 100%;
 }
+
+td.deleteButton {
+    border: black solid 1px;
+    text-align: center;
+}
+
+td.deleteButton:hover{
+    background: brown;
+    color: white;
+}
