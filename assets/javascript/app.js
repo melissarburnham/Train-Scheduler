@@ -12,6 +12,7 @@ window.onload = function() {
   firebase.initializeApp(config);
 
   var database = firebase.database();
+  var trains = database.ref("/trains");
   
   var trainName = "";
   var destination = "";
@@ -30,7 +31,7 @@ $("#submit").on("click", function(){
     var frequency = $("#frequency").val().trim();
     
 
-    database.ref().push({
+    trains.push({
         name: trainName,
         destination: destination,
         firstTrain: trainTime,
@@ -45,7 +46,7 @@ $("#submit").on("click", function(){
     emptyInput();
     });
 
-    database.ref().on("child_added", function(snapshot){
+    trains.on("child_added", function(snapshot){
 
         var sv = snapshot.val();
         var tName = sv.name;
@@ -95,9 +96,13 @@ $("#submit").on("click", function(){
 
         trainCount++;
 
+        // setInterval(function(){
+        //     minutesAwayTd.reload();
+        //   }, 5000)
+
         $(document.body).on("click", ".deleteButton", function() {
             var trainNumber = $(this).attr("data-delete");
-            
+            database.ref("/trains" + trainNumber).remove();        
             $("#train-" + trainNumber).remove();  
 
           });
@@ -109,13 +114,3 @@ $("#submit").on("click", function(){
    
 }
 
-//NEED TO DO:
-//store data into Firebase 
-//use moment.js to calculate next Arrival and Minutes Away
-    //turn trainTime input into integer
-    //turn frequency input into integer
-    // add frequency to trainTime = Next Arrival
-    //use .fromNow() (from Next Arrival) to calculate Minutes Away
-    //next arrival - current time = minutes away OR
-        //current time - next arrival = minutes away
-  //** MAYBE USE FUNCTION moment(time).fromNow() and moment.duration(result).humanize() OR .as('minutes')
