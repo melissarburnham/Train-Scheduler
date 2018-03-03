@@ -96,6 +96,10 @@ $("#submit").on("click", function(){
 
         trainCount++;
 
+        if (nextTrain < currentTime){
+            trainTimeTd.text(nextTrain);
+        }
+
         // setInterval(function(){
         //     minutesAwayTd.reload();
         //   }, 5000)

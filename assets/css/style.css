@@ -8,13 +8,8 @@ body {
     word-break: break-all;
 }
 
-.jumbotron {
-    background-color: rgba(225, 225, 225, 0.345) ; color: black;
-    border: black dotted 2px;
-}
-
 .panel{
-    background-color: rgba(218, 218, 219, 0.194);
+    background-color: rgba(255, 255, 255, 0.283);
     color:black;
     font-weight: bold;
     font-size: 30px;
@@ -33,12 +28,24 @@ body {
 }
 
 h1 {
-    font-family: 'Pacifico', cursive;
+   font-family: 'Amatic SC', cursive;
+   font-size: 90px;
+   font-weight: bolder;
+   background-color: rgba(255, 255, 255, 0.283) ; 
+   color: black;
+   border: black dotted 2px;
+   padding: 50px 0 50px 0;
 }
 
 h3 {
     font-size: 50px;
-    font-family: 'Pacifico', cursive;
+   font-family: 'Amatic SC', cursive;
+   padding-top: 10px;
+   padding-bottom: 10px;
+}
+
+th {
+    font-weight: bolder;
 }
 
 #trainImg {
@@ -51,9 +58,15 @@ h3 {
     width: 100%;
 }
 
+.form-control {
+    font-size: 30px;
+    font-weight: bold;
+}
+
 td.deleteButton {
-    border: black solid 1px;
+    border-radius: 25px;
     text-align: center;
+    padding: 7px;
 }
 
 td.deleteButton:hover,
@@ -67,4 +80,13 @@ td.deleteButton:hover,
     color: black;
     font-family: 'Amatic SC', cursive;
     font-size: 20px;
+}
+
+h5 {
+    color: white;
+}
+
+#trainImg {
+    width:100px;
+    height: 100px;
 }
