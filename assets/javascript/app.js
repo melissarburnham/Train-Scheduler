@@ -23,29 +23,28 @@ window.onload = function() {
   var trainCount = 0;
 
 
-  $('.container').hide();
+// $(".container").hide();
 
-
-  function login(){
+// function login(){
    
-var provider = new firebase.auth.GithubAuthProvider();
-    firebase.auth().signInWithPopup(provider).then(function(result) {
-        var token = result.credential.accessToken;
-        var user = result.user;
+//     var provider = new firebase.auth.GithubAuthProvider();
+//     firebase.auth().signInWithPopup(provider).then(function(result) {
+//         var token = result.credential.accessToken;
+//         var user = result.user;
 
-        console.log(user);
-      }).catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        var email = error.email;
-        var credential = error.credential;
-        console.log(errorMessage);
-      });
-  }
-$(".login").on("click", function(){
-    login();
-    $(".container").show();
-});
+//         console.log(user);
+//       }).catch(function(error) {
+//         var errorCode = error.code;
+//         var errorMessage = error.message;
+//         var email = error.email;
+//         var credential = error.credential;
+//         console.log(errorMessage);
+//       });
+//   }
+// $(".login").on("click", function(){
+//     login();
+//     $(".container").show();
+// });
     
 
 $("#submit").on("click", function(){
