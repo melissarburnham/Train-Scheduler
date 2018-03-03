@@ -9,20 +9,18 @@ body {
 }
 
 .panel{
-    background-color: rgba(255, 255, 255, 0.283);
+    background-color: rgba(255, 255, 255, 0.452);
     color:black;
     font-weight: bold;
     font-size: 30px;
 }
 
 .panel-body {
-    background-color: rgba(255, 255, 255, 0.283);
     color:black;
     font-family: 'Amatic SC', cursive;
 }
 
 .heading {
-    background: rgba(255, 255, 255, 0.283);
     margin: 10px 0 10px 0;
     text-align: center;
 }
@@ -31,14 +29,14 @@ h1 {
    font-family: 'Amatic SC', cursive;
    font-size: 90px;
    font-weight: bolder;
-   background-color: rgba(255, 255, 255, 0.283) ; 
+   background-color: rgba(255, 255, 255, 0.452); 
    color: black;
    border: black dotted 2px;
    padding: 50px 0 50px 0;
 }
 
 h3 {
-    font-size: 50px;
+   font-size: 50px;
    font-family: 'Amatic SC', cursive;
    padding-top: 10px;
    padding-bottom: 10px;

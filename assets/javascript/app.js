@@ -22,6 +22,32 @@ window.onload = function() {
   var nextArrival;
   var trainCount = 0;
 
+
+  $('.container').hide();
+
+
+  function login(){
+   
+var provider = new firebase.auth.GithubAuthProvider();
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+        var token = result.credential.accessToken;
+        var user = result.user;
+
+        console.log(user);
+      }).catch(function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        var email = error.email;
+        var credential = error.credential;
+        console.log(errorMessage);
+      });
+  }
+$(".login").on("click", function(){
+    login();
+    $(".container").show();
+});
+    
+
 $("#submit").on("click", function(){
     event.preventDefault();
     
@@ -97,13 +123,10 @@ $("#submit").on("click", function(){
 
         trainCount++;
 
-        if (nextTrain < currentTime){
-            trainTimeTd.text(nextTrain);
-        }
-
+        
         // setInterval(function(){
-        //     minutesAwayTd.reload();
-        //   }, 5000)
+        //     $(trainTimeTd).load( "https://melissarburnham.github.io/Train-Scheduler/");
+        //   }, 5000);
 
         $(document.body).on("click", ".deleteButton", function() {
             var trainNumber = $(this).attr("data-delete");
@@ -116,7 +139,6 @@ $("#submit").on("click", function(){
     }, function(errorObject){
         console.log("The read failed: " + errorObject.code)      
     })
-    
    
 }
 
