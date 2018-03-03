@@ -49,6 +49,7 @@ $("#submit").on("click", function(){
     trains.on("child_added", function(snapshot){
 
         var sv = snapshot.val();
+        var key = snapshot.key;
         var tName = sv.name;
         var tDestination = sv.destination;
         var tTime = sv.firstTrain;
@@ -106,9 +107,10 @@ $("#submit").on("click", function(){
 
         $(document.body).on("click", ".deleteButton", function() {
             var trainNumber = $(this).attr("data-delete");
-            database.ref("/trains" + trainNumber).remove();        
+            firebase.database().ref().child("trains/" + key).remove();
             $("#train-" + trainNumber).remove();  
-
+            alert('Train was successfully removed');
+            
           });
 
     }, function(errorObject){
