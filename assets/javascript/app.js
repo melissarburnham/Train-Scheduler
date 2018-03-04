@@ -129,6 +129,12 @@ trains.on("child_added", function(snapshot){
     var nextTrain = moment().add(minutesTillTrain, "minutes");
     console.log("ARRIVAL TIME: " + moment(nextTrain).format("HH:mm"));
 
+    if(currentTime <= nextTrain){
+        var trainTimeTd = $("<td>").text(currentTime.format("LT")) 
+    } else {
+        var trainTimeTd = $("<td>").text(nextTrain.format("LT"))
+    };
+
     //dynamically creates a row for each train
     var tBody = $("#trainTable");
     var tRow = $("<tr>");

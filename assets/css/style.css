@@ -69,7 +69,8 @@ td.deleteButton {
 
 td.deleteButton:hover,
 #submit:hover,
-.login:hover {
+.login:hover,
+.logout:hover {
     background: black;
     color: white;
 }
