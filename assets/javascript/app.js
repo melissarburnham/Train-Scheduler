@@ -67,11 +67,12 @@ var uiConfig = {
       });
 
       firebase.auth().signOut().then(function() {
+        $(".container").hide();
+        $(".welcome").show();
+        $(".login").show();
       }).catch(function(error) {
-      });
-
-      
-      });
+    });
+ });
 
 $("#submit").on("click", function(){
     event.preventDefault();

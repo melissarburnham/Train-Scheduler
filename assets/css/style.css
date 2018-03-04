@@ -94,7 +94,7 @@ h5 {
     text-align: center;
 }
 
-.login {
+.login, .logout {
     width: 250px;
     height: 75px;
     text-align: center;
