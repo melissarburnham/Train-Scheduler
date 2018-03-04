@@ -89,7 +89,7 @@ $("#submit").on("click", function(){
     $("input").val("");         
     }
     emptyInput();
-    window.reload();
+    location.reload();
     });
 
 trains.on("child_added", function(snapshot){
@@ -150,7 +150,7 @@ trains.on("child_added", function(snapshot){
         var trainNumber = $(this).attr("data-delete");
         firebase.database().ref().child("trains/" + key).remove();
         $("#train-" + trainNumber).remove();
-        window.reload();
+        location.reload();
         });
 }, function(errorObject){
     console.log("The read failed: " + errorObject.code)      
