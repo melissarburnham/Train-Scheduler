@@ -35,7 +35,6 @@ var uiConfig = {
     signInFlow: 'popup',
     signInSuccessUrl: '<https://melissarburnham.github.io/Train-Scheduler/>',
     signInOptions: [
-      
       firebase.auth.GithubAuthProvider.PROVIDER_ID
     ]
   };
@@ -110,7 +109,7 @@ trains.on("child_added", function(snapshot){
     console.log("FirstTrain: " + tTime);
     //CONVERTS AND CALCULATES TIME FIRST ARRIVAL...
     //...AND MINUTES AWAY
-    var tTimeConverted = moment(tTime, "HH:mm");
+    var tTimeConverted = moment(tTime, "HH:mm").subtract(1, "years");
     console.log("TIME CONVERTED: " + tTimeConverted);
     var currentTime = moment();
     console.log("CURRENT TIME: " + moment(currentTime).format("HH:mm"));
@@ -118,16 +117,10 @@ trains.on("child_added", function(snapshot){
     console.log("DIFFERENCE IN TIME: " + diffTime);
     var tRemainder = diffTime % tFrequency;
     console.log("remainder: " + tRemainder);
-    var minutesTillTrain = (tFrequency - tRemainder);
+    var minutesTillTrain = tFrequency - tRemainder;
     console.log("minTilTrain: " + minutesTillTrain);
     var nextTrain = moment().add(minutesTillTrain, "minutes");
     console.log("ARRIVAL TIME: " + moment(nextTrain).format("HH:mm"));
-
-    if(currentTime <= nextTrain){
-        var trainTimeTd = $("<td>").text(currentTime.format("LT")) 
-    } else {
-        var trainTimeTd = $("<td>").text(nextTrain.format("LT"))
-    };
 
     //dynamically creates a row for each train
     var tBody = $("#trainTable");
