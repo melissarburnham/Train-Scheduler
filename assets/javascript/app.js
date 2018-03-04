@@ -26,9 +26,9 @@ window.onload = function() {
   $(".container").hide();
 
 // Initialize the FirebaseUI Widget using Firebase.
-var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
-var uiConfig = {
+  var uiConfig = {
     callbacks: {
       signInSuccess: function(currentUser, credential, redirectUrl) {
         return true;
@@ -153,10 +153,10 @@ $("#submit").on("click", function(){
         trainCount++;
         //delete train
         $(document.body).on("click", ".deleteButton", function() {
-            alert('Train was successfully removed'); 
             var trainNumber = $(this).attr("data-delete");
             firebase.database().ref().child("trains/" + key).remove();
             $("#train-" + trainNumber).remove();  
+            alert("Train was successfully removed"); 
           });
 
     }, function(errorObject){
