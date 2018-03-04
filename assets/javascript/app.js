@@ -52,6 +52,10 @@ var uiConfig = {
     ui.start('#firebaseui-auth-container', uiConfig);
 
 
+    $(".container").hide();
+
+    $(".login").on("click", function(){
+
     var provider = new firebase.auth.GithubAuthProvider();
 
     firebase.auth().signInWithPopup(provider).then(function(result) {
@@ -77,10 +81,9 @@ var uiConfig = {
         // An error happened.
       });
 
+      $(".container").show();
+      });
 
-
-
-// $(".container").hide();
 
 // function login(){
    
@@ -98,10 +101,6 @@ var uiConfig = {
 //         console.log(errorMessage);
 //       });
 //   }
-// $(".login").on("click", function(){
-//     login();
-//     $(".container").show();
-// });
     
 
 $("#submit").on("click", function(){
