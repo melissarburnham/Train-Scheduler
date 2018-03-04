@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Train Scheduler</title>
+    
+     <!-- Bootswatch Styling link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css">
+    <!-- Font Awesome CSS Icons (For cool glyphicons) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!--CSS link -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+     <!-- favicon link -->
+     <link rel="icon" type="image/ico" href="assets/images/favicon.ico">
+     <!-- google fonts link -->
+     <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Pacifico" rel="stylesheet">
+     <!-- link to firebaseui -->
+     <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+    </head>
+<body>
+    
+  <div class="container">
+
+       <!-- Jumbotron for Title -->
+       <div>
+            <h1 class="text-center"><img src="assets/images/train.jpg" id="trainImg"> Train Schedule</h1>
+      </div>
+        <!-- Train Schedule results -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+              <br>
+
+              <div class="panel panel-primary">
+      
+                <div class = "heading">
+                  <h3 class="title"><strong>Current Train Schedule</strong></h3>
+                </div>
+      
+                 <!-- added trains-->
+                <div class="panel-body" id="currentTrains">
+                    <table id="trainTable">
+                        <tr>
+                          <th>Train Name</th>
+                          <th>Destination</th> 
+                          <th>Frequency (min)</th>
+                          <th>Next Arrival</th>
+                          <th>Minutes Away</th>
+                          <th></th>
+                        </tr>
+                     </table>   
+
+                </div>
+              </div>
+            </div>
+          </div>
+    
+        <!-- Row for Adding Train -->
+        <div class="row">
+          <div class="col-sm-12">
+            <br>
+            <!-- panel for title of form -->
+            <div class="panel panel-primary">
+              <div class="heading">
+                <h3 class="title"><strong>Add Train</strong></h3>
+              </div>
+              <div class="panel-body">
+    
+                <!-- Here we create an HTML Form for handling the inputs-->
+                <form role="form" id="trainForm">
+    
+                  <!-- Train Name input-->
+                  <div class="form-group">
+                    <label for="name">Train Name</label>
+                    <input type="text" class="form-control" id="trainName">
+                  </div>
+    
+                  <!-- Destination input -->
+                  <div class="form-group">
+                    <label for="destination">Destination</label>
+                    <input type="text" class="form-control" id="destination">
+                  </div>
+    
+                  <!-- First Train Time Input-->
+                  <div class="form-group">
+                    <label for="start-year">First Train Time</label>
+                    <input type="time" class="form-control" id="trainTime">
+                  </div>
+    
+                  <!--Frequency Input -->
+                  <div class="form-group">
+                    <label for="end-year">Frequency (minutes)</label>
+                    <input type="text" class="form-control" id="frequency">
+                  </div>
+    
+                  <!-- Here we have our final submit button -->
+                  <button type="submit" value="save" class="btn btn-default" id="submit">Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="logout">LOGOUT</button>
+    
+        <!-- Footer Region -->
+        <div class="row">
+          <div class="col-sm-12">
+    
+            <!-- Line Break followed by closing -->
+            <hr>
+            <h5 class="text-center">Copyright 2018 Melissa Burnham</h5>
+    
+          </div>
+        </div>
+    
+      </div>
+    <!-- firebase link -->
+  <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+
+   <!-- Link to the jQuery Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+   <!--JS link -->
+  <script src="assets/javascript/app.js"></script>
+    <!-- moment.js link -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js" integrity="sha256-ABVkpwb9K9PxubvRrHMkk6wmWcIHUE9eBxNZLXYQ84k=" crossorigin="anonymous"></script>
+</body>
+</html>

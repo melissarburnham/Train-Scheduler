@@ -12,28 +12,26 @@ window.onload = function() {
 
   firebase.initializeApp(config);
 
-  var database = firebase.database();
-  var trains = database.ref("/trains");
-  
-  var trainName = "";
-  var destination = "";
-  var trainTime;
-  var frequency = 0;
-  var minutesAway;
-  var nextArrival;
-  var trainCount = 0;
+var database = firebase.database();
+var trains = database.ref("/trains");
 
-  $(".container").hide();
+var trainName = "";
+var destination = "";
+var trainTime;
+var frequency = 0;
+var minutesAway;
+var nextArrival;
+var trainCount = 0;
 
 // Initialize the FirebaseUI Widget using Firebase.
-  var ui = new firebaseui.auth.AuthUI(firebase.auth());
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
-  var uiConfig = {
+var uiConfig = {
     callbacks: {
-      signInSuccess: function(currentUser, credential, redirectUrl) {
+        signInSuccess: function(currentUser, credential, redirectUrl) {
         return true;
-      }
-    },
+    }
+},
 
     signInFlow: 'popup',
     signInSuccessUrl: '<https://melissarburnham.github.io/Train-Scheduler/>',
@@ -43,9 +41,9 @@ window.onload = function() {
     ]
   };
 
-    ui.start('#firebaseui-auth-container', uiConfig);
+ui.start('#firebaseui-auth-container', uiConfig);
 
-    $(".login").on("click", function(){
+$(".login").on("click", function(){
 
     var provider = new firebase.auth.GithubAuthProvider();
 
@@ -53,9 +51,7 @@ window.onload = function() {
         var token = result.credential.accessToken;
         // The signed-in user info.
         var user = result.user;
-        $(".container").show();
-        $(".welcome").hide();
-        $(".login").hide();
+        $("body").load("app.html");
         console.log(result.user);
         // ...
       }).catch(function(error) {
@@ -66,16 +62,13 @@ window.onload = function() {
         // ...
       });
      });
-
     
-     $(".logout").on("click", function(){
-        firebase.auth().signOut().then(function() {
-            $(".container").hide();
-            $(".welcome").show();
-            $(".login").show();
-          }).catch(function(error) {
-        });
-     });
+$(".logout").on("click", function(){
+    firebase.auth().signOut().then(function() {
+        $("body").load("index.html");
+        }).catch(function(error) {
+    });
+    });
 
 $("#submit").on("click", function(){
     event.preventDefault();
@@ -95,72 +88,71 @@ $("#submit").on("click", function(){
     
     //clear form after user hits submit
     function emptyInput(){
-        $("input").val("");         
+    $("input").val("");         
     }
-
     emptyInput();
     });
 
-    trains.on("child_added", function(snapshot){
+trains.on("child_added", function(snapshot){
 
-        var sv = snapshot.val();
-        var key = snapshot.key;
-        var tName = sv.name;
-        var tDestination = sv.destination;
-        var tTime = sv.firstTrain;
-        var tFrequency = sv.frequency;
-        
-        console.log(sv);
-        console.log(sv.name);
-        console.log(sv.destination);
-        console.log(sv.firstTrian);
-        console.log(sv.frequency);
+    var sv = snapshot.val();
+    var key = snapshot.key;
+    var tName = sv.name;
+    var tDestination = sv.destination;
+    var tTime = sv.firstTrain;
+    var tFrequency = sv.frequency;
+    
+    console.log(sv);
+    console.log(sv.name);
+    console.log(sv.destination);
+    console.log(sv.firstTrian);
+    console.log(sv.frequency);
 
-        console.log("FirstTrain: " + tTime);
-        //CONVERTS AND CALCULATES TIME FIRST ARRIVAL...
-        //...AND MINUTES AWAY
-        var tTimeConverted = moment(tTime, "HH:mm");
-        console.log("TIME CONVERTED: " + tTimeConverted);
-        var currentTime = moment();
-        console.log("CURRENT TIME: " + moment(currentTime).format("HH:mm"));
-        var diffTime = moment().diff(moment(tTimeConverted), "minutes");
-        console.log("DIFFERENCE IN TIME: " + diffTime);
-        var tRemainder = diffTime % tFrequency;
-        console.log("remainder: " + tRemainder);
-        var minutesTillTrain = (tFrequency - tRemainder);
-        console.log("minTilTrain: " + minutesTillTrain);
-        var nextTrain = moment().add(minutesTillTrain, "minutes");
-        console.log("ARRIVAL TIME: " + moment(nextTrain).format("HH:mm"));
+    console.log("FirstTrain: " + tTime);
+    //CONVERTS AND CALCULATES TIME FIRST ARRIVAL...
+    //...AND MINUTES AWAY
+    var tTimeConverted = moment(tTime, "HH:mm");
+    console.log("TIME CONVERTED: " + tTimeConverted);
+    var currentTime = moment();
+    console.log("CURRENT TIME: " + moment(currentTime).format("HH:mm"));
+    var diffTime = moment().diff(moment(tTimeConverted), "minutes");
+    console.log("DIFFERENCE IN TIME: " + diffTime);
+    var tRemainder = diffTime % tFrequency;
+    console.log("remainder: " + tRemainder);
+    var minutesTillTrain = (tFrequency - tRemainder);
+    console.log("minTilTrain: " + minutesTillTrain);
+    var nextTrain = moment().add(minutesTillTrain, "minutes");
+    console.log("ARRIVAL TIME: " + moment(nextTrain).format("HH:mm"));
 
-        //dynamically creates a row for each train
-        var tBody = $("#trainTable");
-        var tRow = $("<tr>");
-        var trainTd = $("<td>").text(tName);
-        var destinationTd = $("<td>").text(tDestination);
-        var trainTimeTd = $("<td>").text(nextTrain.format("LT"));
-        var frequencyTd = $("<td>").text(tFrequency);
-        var minutesAwayTd = $("<td>").text(minutesTillTrain);
-        var button = $("<td>").html($("<button>"));
-        button.attr("data-delete", trainCount);
-        button.addClass("deleteButton");
-        button.text("DELETE");
-        
-        tRow.attr("id", "train-" + trainCount);
-        // Append the newly created table data to the table row
-        tRow.append(trainTd, destinationTd, frequencyTd, trainTimeTd, minutesTillTrain, button);
-        // Append the table row to the table body
-        tBody.append(tRow);
+    //dynamically creates a row for each train
+    var tBody = $("#trainTable");
+    var tRow = $("<tr>");
+    var trainTd = $("<td>").text(tName);
+    var destinationTd = $("<td>").text(tDestination);
+    var trainTimeTd = $("<td>").text(nextTrain.format("LT"));
+    var frequencyTd = $("<td>").text(tFrequency);
+    var minutesAwayTd = $("<td>").text(minutesTillTrain);
+    var button = $("<td>").html($("<button>"));
+    button.attr("data-delete", trainCount);
+    button.addClass("deleteButton");
+    button.text("DELETE");
+    
+    tRow.attr("id", "train-" + trainCount);
+    // Append the newly created table data to the table row
+    tRow.append(trainTd, destinationTd, frequencyTd, trainTimeTd, minutesTillTrain, button);
+    // Append the table row to the table body
+    tBody.append(tRow);
 
-        trainCount++;
-        //delete train
-        $(".deleteButton").on("click", function() {
-            alert("Train removal was a success"); 
-            var trainNumber = $(this).attr("data-delete");
-            firebase.database().ref().child("trains/" + key).remove();
-            $("#train-" + trainNumber).remove();
-          });
-    }, function(errorObject){
-        console.log("The read failed: " + errorObject.code)      
-    })   
+    trainCount++;
+    //delete train
+    $(".deleteButton").on("click", function() {
+        alert("Train removal was a success"); 
+        var trainNumber = $(this).attr("data-delete");
+        firebase.database().ref().child("trains/" + key).remove();
+        $("#train-" + trainNumber).remove();
+        });
+}, function(errorObject){
+    console.log("The read failed: " + errorObject.code)      
+})   
 }
 
