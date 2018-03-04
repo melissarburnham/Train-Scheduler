@@ -9,6 +9,7 @@ window.onload = function() {
     storageBucket: "train-scheduler-321c9.appspot.com",
     messagingSenderId: "1030667431613"
   };
+
   firebase.initializeApp(config);
 
   var database = firebase.database();
@@ -42,7 +43,6 @@ var uiConfig = {
     ]
   };
 
- 
     ui.start('#firebaseui-auth-container', uiConfig);
 
     $(".login").on("click", function(){
@@ -131,6 +131,7 @@ $("#submit").on("click", function(){
         var nextTrain = moment().add(minutesTillTrain, "minutes");
         console.log("ARRIVAL TIME: " + moment(nextTrain).format("HH:mm"));
 
+        //dynamically creates a row for each train
         var tBody = $("#trainTable");
         var tRow = $("<tr>");
         var trainTd = $("<td>").text(tName);
@@ -150,18 +151,12 @@ $("#submit").on("click", function(){
         tBody.append(tRow);
 
         trainCount++;
-
-        
-        // setInterval(function(){
-        //     $(trainTimeTd).load( "https://melissarburnham.github.io/Train-Scheduler/");
-        //   }, 5000);
-
+        //delete train
         $(document.body).on("click", ".deleteButton", function() {
             var trainNumber = $(this).attr("data-delete");
+            alert('Train was successfully removed'); 
             firebase.database().ref().child("trains/" + key).remove();
             $("#train-" + trainNumber).remove();  
-            alert('Train was successfully removed');
-            
           });
 
     }, function(errorObject){
