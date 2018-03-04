@@ -56,7 +56,7 @@ $(".login").on("click", function(){
         var token = result.credential.accessToken;
         // The signed-in user info.
         var user = result.user;
-        window.location.href = "app.html";;
+        // window.location.href = "app.html";;
         console.log(result.user);
         // ...
       }).catch(function(error) {
@@ -70,7 +70,7 @@ $(".login").on("click", function(){
     
 $(".logout").on("click", function(){
     firebase.auth().signOut().then(function() {
-        window.location.href = "index.html";;
+        // window.location.href = "index.html";;
         }).catch(function(error) {
     });
     });
