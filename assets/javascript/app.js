@@ -1,14 +1,14 @@
 window.onload = function() {
 
  // Initialize Firebase
- var config = {
+var config = {
     apiKey: "AIzaSyCTCvn5-nM73Nu1A-w25oa554hmLaxZl8Q",
     authDomain: "train-scheduler-321c9.firebaseapp.com",
     databaseURL: "https://train-scheduler-321c9.firebaseio.com",
     projectId: "train-scheduler-321c9",
     storageBucket: "train-scheduler-321c9.appspot.com",
     messagingSenderId: "1030667431613"
-  };
+};
 
   firebase.initializeApp(config);
 
@@ -121,6 +121,7 @@ trains.on("child_added", function(snapshot){
     console.log("minTilTrain: " + minutesTillTrain);
     var nextTrain = moment().add(minutesTillTrain, "minutes");
     console.log("ARRIVAL TIME: " + moment(nextTrain).format("HH:mm"));
+
 
     //dynamically creates a row for each train
     var tBody = $("#trainTable");
