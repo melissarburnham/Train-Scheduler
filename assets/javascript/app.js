@@ -65,14 +65,16 @@ var uiConfig = {
         var credential = error.credential;
         // ...
       });
+     });
 
-      firebase.auth().signOut().then(function() {
-        $(".container").hide();
-        $(".welcome").show();
-        $(".login").show();
-      }).catch(function(error) {
-    });
- });
+     $(".logout").on("click", function(){
+        firebase.auth().signOut().then(function() {
+            $(".container").hide();
+            $(".welcome").show();
+            $(".login").show();
+          }).catch(function(error) {
+        });
+     });
 
 $("#submit").on("click", function(){
     event.preventDefault();
