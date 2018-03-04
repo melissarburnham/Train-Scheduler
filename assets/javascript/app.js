@@ -67,6 +67,11 @@ window.onload = function() {
       });
      });
 
+     if (!localStorage.hideWelcomeMessage) {
+        document.getElementById('welcome-message').style.display="block";
+        localStorage.hideWelcomeMessage = true;
+     }
+
      $(".logout").on("click", function(){
         firebase.auth().signOut().then(function() {
             $(".container").hide();
