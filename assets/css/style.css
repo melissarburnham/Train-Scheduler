@@ -68,7 +68,8 @@ td.deleteButton {
 }
 
 td.deleteButton:hover,
-#submit:hover {
+#submit:hover,
+.login:hover {
     background: black;
     color: white;
 }
@@ -87,4 +88,21 @@ h5 {
 #trainImg {
     width:100px;
     height: 100px;
+}
+
+.welcome {
+    text-align: center;
+}
+
+.login {
+    width: 250px;
+    height: 75px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.452);
+    color: black;
+    font-size: 50px;
+    font-family: 'Amatic SC', cursive;
+    border: black dotted 2px;
+    margin: auto;
+    display: block;
 }
