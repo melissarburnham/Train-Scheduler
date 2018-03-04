@@ -89,6 +89,7 @@ $("#submit").on("click", function(){
     $("input").val("");         
     }
     emptyInput();
+    window.reload();
     });
 
 trains.on("child_added", function(snapshot){
