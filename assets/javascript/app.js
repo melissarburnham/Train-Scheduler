@@ -31,11 +31,6 @@ var uiConfig = {
         signInSuccess: function(currentUser, credential, redirectUrl) {
         return true;
     },
-    uiShown: function() {
-        // The widget is rendered.
-        // Hide the loader.
-        document.getElementById('loader').style.display = 'none';
-      }
 },
 
     signInFlow: 'popup',
