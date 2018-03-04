@@ -22,6 +22,8 @@ window.onload = function() {
   var nextArrival;
   var trainCount = 0;
 
+  $(".container").hide();
+
 // Initialize the FirebaseUI Widget using Firebase.
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
@@ -51,9 +53,6 @@ var uiConfig = {
   // The start method will wait until the DOM is loaded.
     ui.start('#firebaseui-auth-container', uiConfig);
 
-
-    $(".container").hide();
-
     $(".login").on("click", function(){
 
     var provider = new firebase.auth.GithubAuthProvider();
@@ -63,6 +62,7 @@ var uiConfig = {
         var token = result.credential.accessToken;
         // The signed-in user info.
         var user = result.user;
+        $(".container").show();
         // ...
       }).catch(function(error) {
         // Handle Errors here.
@@ -81,7 +81,7 @@ var uiConfig = {
         // An error happened.
       });
 
-      $(".container").show();
+      
       });
 
 
