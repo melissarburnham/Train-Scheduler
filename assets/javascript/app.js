@@ -153,13 +153,12 @@ $("#submit").on("click", function(){
 
         trainCount++;
         //delete train
-        $(document.body).on("click", ".deleteButton", function() {
+        $(".deleteButton").on("click", function() {
+            alert("Train removal was a success"); 
             var trainNumber = $(this).attr("data-delete");
             firebase.database().ref().child("trains/" + key).remove();
-            $("#train-" + trainNumber).remove();  
-            alert("Train was successfully removed"); 
+            $("#train-" + trainNumber).remove();
           });
-
     }, function(errorObject){
         console.log("The read failed: " + errorObject.code)      
     })   
