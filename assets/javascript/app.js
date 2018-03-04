@@ -32,9 +32,8 @@ var uiConfig = {
         return true;
     },
 },
-
     signInFlow: 'popup',
-    signInSuccessUrl: '<https://melissarburnham.github.io/Train-Scheduler/app.html>',
+    signInSuccessUrl: '<https://melissarburnham.github.io/Train-Scheduler/>',
     signInOptions: [
       
       firebase.auth.GithubAuthProvider.PROVIDER_ID
