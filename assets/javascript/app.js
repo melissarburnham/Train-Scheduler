@@ -153,8 +153,8 @@ $("#submit").on("click", function(){
         trainCount++;
         //delete train
         $(document.body).on("click", ".deleteButton", function() {
-            var trainNumber = $(this).attr("data-delete");
             alert('Train was successfully removed'); 
+            var trainNumber = $(this).attr("data-delete");
             firebase.database().ref().child("trains/" + key).remove();
             $("#train-" + trainNumber).remove();  
           });
