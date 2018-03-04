@@ -149,6 +149,7 @@ trains.on("child_added", function(snapshot){
         var trainNumber = $(this).attr("data-delete");
         firebase.database().ref().child("trains/" + key).remove();
         $("#train-" + trainNumber).remove();
+        window.reload();
         });
 }, function(errorObject){
     console.log("The read failed: " + errorObject.code)      
